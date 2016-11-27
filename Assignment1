@@ -1,6 +1,0 @@
-1. Find out the SVN branch for Hadoop 2.2.0 release and identify the tool used for its source code
-
-https://hadoop.apache.org/version_control.html
-
-SVN trunk: http://svn.apache.org/viewvc/hadoop/common/trunk/	
-Tools: TortoiseSVN GUI client for Windows and SVN plugins available for both Eclipse and IntelliJ IDEA. 
