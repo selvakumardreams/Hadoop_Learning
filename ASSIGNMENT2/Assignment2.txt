@@ -1,0 +1,110 @@
+Assignment 2
+
+1. bo@bo-ThinkPad-W520:~$ hdfs dfs -mkdir /inputs
+
+2. bo@bo-ThinkPad-W520:~$ hdfs dfs -mkdir -p /inputs/mr_inputs
+3. bo@bo-ThinkPad-W520:~$ hdfs dfs -mkdir -p /inputs/pig_inputs
+4. bo@bo-ThinkPad-W520:~$ hdfs dfs -mkdir -p /inputs/project_inputs	
+
+5. bo@bo-ThinkPad-W520:~$ hdfs dfs -ls /inputs
+16/11/27 12:32:58 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 3 items
+drwxr-xr-x   - bo supergroup          0 2016-11-27 12:31 /inputs/mr_inputs
+drwxr-xr-x   - bo supergroup          0 2016-11-27 12:32 /inputs/pig_inputs
+drwxr-xr-x   - bo supergroup          0 2016-11-27 12:32 /inputs/project_inputs
+
+6. bo@bo-ThinkPad-W520:~$ hdfs dfs -put /home/bo/HADOOP/ASSIGNMENT2/names.txt /inputs/mr_inputs/
+
+7. bo@bo-ThinkPad-W520:~$ hdfs dfs -ls /inputs/mr_inputs
+16/11/27 12:38:14 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 1 items
+-rw-r--r--   1 bo supergroup        743 2016-11-27 12:37 /inputs/mr_inputs/names.txt
+
+8. bo@bo-ThinkPad-W520:~/hadoop-2.6.0/sbin$ ./mr-jobhistory-daemon.sh start historyserver
+
+9. bo@bo-ThinkPad-W520:~/hadoop-2.6.0/share/hadoop/mapreduce$ hadoop jar hadoop-mapreduce-examples-2.6.0.jar wordcount /inputs/mr_inputs/names.txt /output
+16/11/27 12:49:17 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+16/11/27 12:49:18 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+16/11/27 12:49:19 INFO input.FileInputFormat: Total input paths to process : 1
+16/11/27 12:49:19 INFO mapreduce.JobSubmitter: number of splits:1
+16/11/27 12:49:19 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1480244576692_0001
+16/11/27 12:49:19 INFO impl.YarnClientImpl: Submitted application application_1480244576692_0001
+16/11/27 12:49:19 INFO mapreduce.Job: The url to track the job: http://bo-ThinkPad-W520:8088/proxy/application_1480244576692_0001/
+16/11/27 12:49:19 INFO mapreduce.Job: Running job: job_1480244576692_0001
+16/11/27 12:49:26 INFO mapreduce.Job: Job job_1480244576692_0001 running in uber mode : false
+16/11/27 12:49:26 INFO mapreduce.Job:  map 0% reduce 0%
+16/11/27 12:49:31 INFO mapreduce.Job:  map 100% reduce 0%
+16/11/27 12:49:36 INFO mapreduce.Job:  map 100% reduce 100%
+16/11/27 12:49:36 INFO mapreduce.Job: Job job_1480244576692_0001 completed successfully
+16/11/27 12:49:37 INFO mapreduce.Job: Counters: 49
+	File System Counters
+		FILE: Number of bytes read=190
+		FILE: Number of bytes written=211881
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=856
+		HDFS: Number of bytes written=132
+		HDFS: Number of read operations=6
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=1
+		Launched reduce tasks=1
+		Data-local map tasks=1
+		Total time spent by all maps in occupied slots (ms)=2562
+		Total time spent by all reduces in occupied slots (ms)=2808
+		Total time spent by all map tasks (ms)=2562
+		Total time spent by all reduce tasks (ms)=2808
+		Total vcore-seconds taken by all map tasks=2562
+		Total vcore-seconds taken by all reduce tasks=2808
+		Total megabyte-seconds taken by all map tasks=2623488
+		Total megabyte-seconds taken by all reduce tasks=2875392
+	Map-Reduce Framework
+		Map input records=92
+		Map output records=91
+		Map output bytes=1106
+		Map output materialized bytes=190
+		Input split bytes=113
+		Combine input records=91
+		Combine output records=13
+		Reduce input groups=13
+		Reduce shuffle bytes=190
+		Reduce input records=13
+		Reduce output records=13
+		Spilled Records=26
+		Shuffled Maps =1
+		Failed Shuffles=0
+		Merged Map outputs=1
+		GC time elapsed (ms)=56
+		CPU time spent (ms)=1340
+		Physical memory (bytes) snapshot=464375808
+		Virtual memory (bytes) snapshot=1755721728
+		Total committed heap usage (bytes)=402653184
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=743
+	File Output Format Counters 
+		Bytes Written=132
+10. bo@bo-ThinkPad-W520:~/hadoop-2.6.0/share/hadoop/mapreduce$ hdfs dfs -cat /output/*
+16/11/27 12:51:37 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Selvakumar	7
+kavitha	7
+kumar	7
+malarkodi	7
+murugan	7
+prasanna	7
+priya	7
+sanjay	7
+santhosh	7
+sathish	7
+subramanian	7
+vani	7
+vinoth	7
+	
