@@ -1,0 +1,82 @@
+1. bo@bo-ThinkPad-W520:~/hadoop-2.6.0/share/hadoop/mapreduce$ hdfs dfs -put /home/bo/HADOOP/ASSIGNMENT/ASSIGNMENT2/news.txt /inputs/mr_inputs/
+
+
+2. bo@bo-ThinkPad-W520:~/hadoop-2.6.0/share/hadoop/mapreduce$ hdfs dfs -ls /inputs/mr_inputs
+16/11/27 13:55:18 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 2 items
+-rw-r--r--   1 bo supergroup        743 2016-11-27 12:37 /inputs/mr_inputs/names.txt
+-rw-r--r--   1 bo supergroup       2289 2016-11-27 13:53 /inputs/mr_inputs/news.txt
+
+3. bo@bo-ThinkPad-W520:~/hadoop-2.6.0/share/hadoop/mapreduce$ hadoop jar /home/bo/HADOOP/ASSIGNMENT/ASSIGNMENT2/MRLineCount.jar /inputs/mr_inputs/news.txt /outputCount16/11/27 22:40:42 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+16/11/27 22:40:42 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+16/11/27 22:40:43 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+16/11/27 22:40:43 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+16/11/27 22:40:43 INFO mapred.FileInputFormat: Total input paths to process : 1
+16/11/27 22:40:43 INFO mapreduce.JobSubmitter: number of splits:2
+16/11/27 22:40:43 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1480244576692_0004
+16/11/27 22:40:43 INFO impl.YarnClientImpl: Submitted application application_1480244576692_0004
+16/11/27 22:40:43 INFO mapreduce.Job: The url to track the job: http://bo-ThinkPad-W520:8088/proxy/application_1480244576692_0004/
+16/11/27 22:40:43 INFO mapreduce.Job: Running job: job_1480244576692_0004
+16/11/27 22:40:48 INFO mapreduce.Job: Job job_1480244576692_0004 running in uber mode : false
+16/11/27 22:40:48 INFO mapreduce.Job:  map 0% reduce 0%
+16/11/27 22:40:54 INFO mapreduce.Job:  map 100% reduce 0%
+16/11/27 22:41:00 INFO mapreduce.Job:  map 100% reduce 100%
+16/11/27 22:41:00 INFO mapreduce.Job: Job job_1480244576692_0004 completed successfully
+16/11/27 22:41:00 INFO mapreduce.Job: Counters: 49
+	File System Counters
+		FILE: Number of bytes read=64
+		FILE: Number of bytes written=317833
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=3632
+		HDFS: Number of bytes written=26
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=5684
+		Total time spent by all reduces in occupied slots (ms)=2728
+		Total time spent by all map tasks (ms)=5684
+		Total time spent by all reduce tasks (ms)=2728
+		Total vcore-seconds taken by all map tasks=5684
+		Total vcore-seconds taken by all reduce tasks=2728
+		Total megabyte-seconds taken by all map tasks=5820416
+		Total megabyte-seconds taken by all reduce tasks=2793472
+	Map-Reduce Framework
+		Map input records=18
+		Map output records=18
+		Map output bytes=486
+		Map output materialized bytes=70
+		Input split bytes=198
+		Combine input records=18
+		Combine output records=2
+		Reduce input groups=1
+		Reduce shuffle bytes=70
+		Reduce input records=2
+		Reduce output records=1
+		Spilled Records=4
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=79
+		CPU time spent (ms)=1820
+		Physical memory (bytes) snapshot=740106240
+		Virtual memory (bytes) snapshot=2601205760
+		Total committed heap usage (bytes)=603979776
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=3434
+	File Output Format Counters 
+		Bytes Written=26
+
+
