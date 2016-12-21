@@ -1,3 +1,8 @@
+---- Data Set ------
+
+Link: https://www.dropbox.com/s/088v50nvtk39kg2/BX-CSV-Dump.zip?dl=0
+
+
 -- Loading the files into HDFS ----
 
 
