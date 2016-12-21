@@ -1,0 +1,22 @@
+-- Loading the files into HDFS ----
+
+
+hdfs dfs -put /home/m1013673/Hadoop_Learning/Project1_BookData/BX-CSV-Dump/BX-Book-Ratings.csv /inputs/project_inputs/
+hdfs dfs -put /home/m1013673/Hadoop_Learning/Project1_BookData/BX-CSV-Dump/BX-Books.csv /inputs/project_inputs/
+hdfs dfs -put /home/m1013673/Hadoop_Learning/Project1_BookData/BX-CSV-Dump/BX-Users.csv /inputs/project_inputs/
+
+
+--- Statement 1 (Frequency)------
+
+hadoop jar /home/m1013673/Hadoop_Learning/Project1_BookData/BooksDataFreq.jar /inputs/project_inputs/BX-Books.csv /outputFrequency
+
+-----Statement 2(Maximum)------
+
+hadoop jar /home/m1013673/Hadoop_Learning/Project1_BookData/BooksDataMax.jar /inputs/project_inputs/BX-Books.csv /outputMaximum
+
+
+----Statement 3(Rank)--------
+
+hadoop jar /home/m1013673/Hadoop_Learning/Project1_BookData/BooksDataRank.jar /inputs/project_inputs/BX-Books.csv /inputs/project_inputs/BX-Book-Ratings.csv /outputTemp /outputRank
+
+
