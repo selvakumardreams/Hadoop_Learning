@@ -1,0 +1,34 @@
+---- Data Set ------
+
+Movies.csv
+
+
+-- Loading the files into HDFS ----
+
+
+hdfs dfs -put /home/m1013673/Hadoop_Learning/Project2_MovieData/Movies.csv /inputs/project_inputs/
+
+--- Statement 1 (ActorActressPair)------
+
+hadoop jar /home/m1013673/Hadoop_Learning/Project2_MovieData/ActorActressPair.jar /inputs/project_inputs/Movies.csv /outputActorActressPair
+
+-----Statement 2(BlockBusterMovie)------
+
+hadoop jar /home/m1013673/Hadoop_Learning/Project2_MovieData/BlockBusterMovie.jar /inputs/project_inputs/Movies.csv /outputBlockBusterMovie
+
+
+----Statement 3(MovieHorrorAward)--------
+
+hadoop jar /home/m1013673/Hadoop_Learning/Project2_MovieData/MovieHorrorAward.jar /inputs/project_inputs/Movies.csv /outputMovieHorrorAward
+
+----Statement 4(MovieStableActor)--------
+
+hadoop jar /home/m1013673/Hadoop_Learning/Project2_MovieData/MovieStableActor.jar /inputs/project_inputs/Movies.csv /outputMovieStableActor
+
+----Statement 5(MovieStableActress)--------
+
+hadoop jar /home/m1013673/Hadoop_Learning/Project2_MovieData/MovieStableActress.jar /inputs/project_inputs/Movies.csv /outputMovieStableActress
+
+----Statement 6(MovieStableDirector)--------
+
+hadoop jar /home/m1013673/Hadoop_Learning/Project2_MovieData/MovieStableDirector.jar /inputs/project_inputs/Movies.csv /outputMovieStableDirector
