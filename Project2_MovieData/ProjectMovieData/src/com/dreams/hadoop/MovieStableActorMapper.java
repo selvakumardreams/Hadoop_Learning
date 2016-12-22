@@ -21,6 +21,8 @@ import com.google.common.collect.Multimap;
  *
  */
 public class MovieStableActorMapper extends Mapper<LongWritable, Text, DoublePair, TextPair> {
+	
+	private static final String TAG = "MovieStableActorMapper";
 
 	Multimap<String, Integer> multiMap = ArrayListMultimap.create();
 
@@ -40,8 +42,7 @@ public class MovieStableActorMapper extends Mapper<LongWritable, Text, DoublePai
 
 			int popularity = Integer.parseInt(line[7]);
 			String actor = line[4].trim();
-			multiMap.put(actor, popularity);		       		   
-
+			multiMap.put(actor, popularity);
 		}
 	}	 
 	
@@ -62,14 +63,19 @@ public class MovieStableActorMapper extends Mapper<LongWritable, Text, DoublePai
 				pop.add(c.next());
 			}
 
-			Double popMean = computeMean(pop);
-			Double popVariance = computeVariance(pop); 
+			Double popMean = calculateMean(pop);
+			System.out.println(TAG + "popMean: " + popMean);
+			Double popVariance = calculateVariance(pop); 
+			System.out.println(TAG + "popVariance: " + popVariance);
 			Double popSd =  Math.sqrt(popVariance);
+			System.out.println(TAG + "popSd: " + popSd);
 			pop.clear();
 
 			String popSdString = popSd.toString();
-
-			context.write(new DoublePair(new DoubleWritable(popMean), new DoubleWritable(popVariance)), new TextPair(new Text(popSdString), new Text(key)));
+			context.write(new DoublePair(new DoubleWritable(popMean), 
+					new DoubleWritable(popVariance)), 
+					new TextPair(new Text(popSdString), 
+							new Text(key)));
 		}
 	}
 
@@ -78,11 +84,12 @@ public class MovieStableActorMapper extends Mapper<LongWritable, Text, DoublePai
 	 * @param popularity
 	 * @return
 	 */
-	public double computeMean(ArrayList<Integer> popularity) {
+	public double calculateMean(ArrayList<Integer> popularity) {
 		int popTotal = 0;	
 		
 		for(int i=0;i<popularity.size();i++) {
-			popTotal+=popularity.get(i);			
+			popTotal += popularity.get(i);		
+			System.out.println(TAG + "Total: " + popTotal + "Popularity :" + popularity.get(i));
 		}
 		return (popTotal/popularity.size());		
 	}
@@ -92,10 +99,10 @@ public class MovieStableActorMapper extends Mapper<LongWritable, Text, DoublePai
 	 * @param popularity
 	 * @return
 	 */
-	public double computeVariance(ArrayList<Integer> popularity) {
+	public double calculateVariance(ArrayList<Integer> popularity) {
 		if (popularity.size()==0)   return Double.NaN;
-		double avg = computeMean(popularity);
-		double sum=0.0;
+		double avg = calculateMean(popularity);
+		double sum = 0.0;
 		for(int i=0;i<popularity.size();i++) {
 			sum+= (popularity.get(i)-avg) *  (popularity.get(i)-avg);
 		}

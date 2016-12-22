@@ -13,28 +13,25 @@ import com.google.common.collect.Ordering;
 import com.google.common.collect.SortedSetMultimap;
 import com.google.common.collect.TreeMultimap;
 
-class MovieDataReducer extends Reducer<IntWritable,TextPair,Text,Text> {
+public class MovieDataReducer extends Reducer<IntWritable,TextPair,Text,Text> {
 
 	String delim2 =";";
-	String header1 = "MOVIE_YEAR", header3 = "POPULARITY",header2 = "";
+	String header1 = "MOVIE_YEAR", header3 = "POPULARITY", header2 = "";
 
-	SortedSetMultimap<Integer,String> sortmulMap=TreeMultimap.create(Ordering.natural().reverse(), Ordering.natural());
+	SortedSetMultimap<Integer,String> sortmulMap = TreeMultimap.create(Ordering.natural().reverse(), Ordering.natural());
 
 	public void reduce(IntWritable key, Iterable<TextPair> values,Context context) 
 			throws IOException, InterruptedException {
 
 		String[] value1 = new String[100]; 
 		String value2 = "";
-		int value1Pop=0;
+		int value1Pop = 0;
 
 		for (TextPair val:values) {
 			value1 = val.getFirst().toString().split(delim2);
 			value1Pop = Integer.parseInt(value1[1]);
-
-
 			value2 = val.getSecond().toString();
-
-			sortmulMap.put(value1Pop,value1[0]+"\t"+value1[2]);
+			sortmulMap.put(value1Pop,value1[0] + "\t" + value1[2]);
 		}   
 		
 		header2 = value2 + "\t";
