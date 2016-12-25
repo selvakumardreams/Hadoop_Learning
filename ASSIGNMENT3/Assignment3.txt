@@ -5,5 +5,8 @@ http://localhost:19888/jobhistory
 m1013673@A2ML21231L:~$ hdfs dfs -put /home/m1013673/Hadoop_Learning/ASSIGNMENT3/Module3_Ext1.txt /inputs/mr_inputs/
 
 
+m1013673@A2ML21231L:~/hadoop-2.6.0/bin$ hdfs dfs -rmr /outputModule3Ex1
+
+
 m1013673@A2ML21231L:~/hadoop-2.6.0/share/hadoop/mapreduce$ hadoop jar /home/m1013673/Hadoop_Learning/ASSIGNMENT3/Module3Ex1.jar /inputs/mr_inputs/Module3_Ext1.txt /outputModule3Ex1
 
