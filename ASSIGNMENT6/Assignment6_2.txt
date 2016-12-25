@@ -1,0 +1,14 @@
+m1013673@A2ML21231L:~$ pig 
+
+
+----------Pig Program to count the number of lines in your input file---------------
+
+drivers = LOAD '/inputs/mr_inputs/pig1.txt' USING PigStorage(',') as (name:chararray,age:int,degree:chararray,city:chararray,state:chararray);
+
+store drivers into '/inputs/pig_inputs';
+
+DRIVER_GROUPED = GROUP drivers ALL;
+
+NUMBER = FOREACH DRIVER_GROUPED GENERATE COUNT_STAR(drivers);
+
+DUMP NUMBER;

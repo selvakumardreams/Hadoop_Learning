@@ -1,0 +1,5 @@
+Selvakumar,33,MCA,Bangalore,Karnataka
+Kumar,34,BE,Chennai,Tamilnadu
+Sanjay,30,MBBS,Chennai,Tamilnadu
+Mani,52,MCA,Bangalore,Karnataka
+Malar,48,BE,Bangalore,Karnataka

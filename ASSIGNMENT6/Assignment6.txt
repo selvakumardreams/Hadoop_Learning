@@ -1,0 +1,32 @@
+m1013673@A2ML21231L:~$ pig 
+
+
+----------A Pig Script to Load this file---------------\
+
+grunt> drivers = LOAD '/inputs/mr_inputs/pig1.txt' USING PigStorage(',') as (name:chararray,age:int,degree:chararray,city:chararray,state:chararray);
+
+grunt> store drivers into '/inputs/pig_inputs';
+
+
+-------A Pig Script to Select first and 4 th field------------------
+
+grunt> select_fields = foreach drivers generate (chararray) $0 as name, (chararray) $3 as city;
+
+grunt> DUMP select_fields
+
+-----OUTPUT-------
+
+(Selvakumar,Bangalore)
+(Kumar,Chennai)
+(Sanjay,Chennai)
+(Mani,Bangalore)
+(Malar,Bangalore)
+
+
+-------An UDF to create another field which is the concatenation of first and 4 th field-------------
+
+REGISTER /home/m1013673/Hadoop_Learning/ASSIGNMENT6/PigUDF.jar;
+DEFINE CONCAT_ALL com.dreams.hadoop.PigUDF(); 
+B = FOREACH drivers GENERATE CONCAT_ALL($0,'_',$3);
+DUMP B;
+
