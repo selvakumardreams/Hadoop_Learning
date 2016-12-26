@@ -1,0 +1,48 @@
+m1013673@A2ML21231L:~$ hbase shell
+
+	
+------HBase table ‘employee’ with two column families ‘official’ and ‘personal’-----------
+
+create 'employee','official','personal'
+
+describe 'employee';
+
+put 'employee','1','official:designation','project lead'
+put 'employee','1','official:salary','50000'
+put 'employee','1','personal:name','selvakumar'
+put 'employee','1','personal:city','bangalore'
+
+get 'employee', '1'
+
+put 'employee','2','official:designation','Team Lead'
+put 'employee','2','official:salary','70000'
+put 'employee','2','personal:name','selva'
+put 'employee','2','personal:city','bangalore'
+
+get 'employee', '2'
+
+delete 'employee', '2', 'personal:city'
+delete 'employee', '2', 'personal:name'
+delete 'employee', '2', 'official:salary'
+delete 'employee', '2', 'official:designation'
+
+--------Load the data of the table from step2 in Pig-----------
+
+create 'employee','official','personal'
+
+hdfs dfs -put /home/m1013673/Hadoop_Learning/ASSIGNMENT9/employee /inputs/pig_inputs/
+
+raw_data = LOAD 'hdfs:/inputs/pig_inputs/employee' USING PigStorage(',') AS (designation:chararray,salary:int,name:chararray,city:chararray);
+
+DUMP raw_data
+
+STORE raw_data INTO 'hbase://employee' USING org.apache.pig.backend.hadoop.hbase.HBaseStorage(
+'official:designation 
+ official:salary 
+ official:name 
+ official:city'
+);
+
+scan 'employee'
+
+
