@@ -1,0 +1,69 @@
+m1013673@A2ML21231L:~$ hive
+
+	
+------store_details-----------
+
+create table store_details(store_location String, store_description String, store_type String) row format delimited fields terminated by ','; 
+
+describe formatted store_details;
+
+load data local inpath '/home/m1013673/Hadoop_Learning/ASSIGNMENT7/store_details' into table store_details;
+
+
+hadoop dfs -ls hdfs://localhost:9000/user/hive/warehouse/store_details
+
+
+------store_sales-----------------
+
+create table store_sales(store_location String, operation_date Date, tot_sales Int) row format delimited fields terminated by ','; 
+
+describe formatted store_sales;
+
+load data local inpath '/home/m1013673/Hadoop_Learning/ASSIGNMENT7/store_sales' into table store_sales;
+
+hadoop dfs -ls hdfs://localhost:9000/user/hive/warehouse/store_sales
+
+
+------stores_report---------------
+
+
+CREATE EXTERNAL TABLE stores_report(store_location STRING, store_description STRING, store_type STRING, operation_date DATE, tot_sales INT) COMMENT 'Data about stores report' Row format delimited Fields terminated by ',' LOCATION '/user/hive/warehouse/stores_report';
+
+INSERT OVERWRITE TABLE stores_report SELECT T1.store_location,T1.store_description,T1.store_type,T2.operation_date,T2.tot_sales FROM store_details T1 JOIN store_sales T2 ON T1.store_location = T2.store_location;
+
+
+hadoop dfs -ls hdfs://localhost:9000/user/hive/warehouse/stores_report
+
+hive> select * from stores_report;
+OK
+100	Mumbai-Juhu	FLS	2015-01-01	36748
+100	Mumbai-Juhu	FLS	2015-01-02	47829
+100	Mumbai-Juhu	FLS	2015-01-03	29274
+100	Mumbai-Juhu	FLS	2015-01-04	38495
+100	Mumbai-Juhu	FLS	2015-01-05	56838
+101	Mumbai-Bandra	FLS	2015-01-01	36348
+101	Mumbai-Bandra	FLS	2015-01-02	43729
+101	Mumbai-Bandra	FLS	2015-01-03	29274
+101	Mumbai-Bandra	FLS	2015-01-04	38295
+101	Mumbai-Bandra	FLS	2015-01-05	59368
+102	Mumbai-Malad	SPL	2015-01-01	36946
+102	Mumbai-Malad	SPL	2015-01-02	43834
+102	Mumbai-Malad	SPL	2015-01-03	29835
+102	Mumbai-Malad	SPL	2015-01-04	38837
+102	Mumbai-Malad	SPL	2015-01-05	58457
+103	Mumbai-Vashi	SPL	2015-01-01	94548
+103	Mumbai-Vashi	SPL	2015-01-02	84529
+103	Mumbai-Vashi	SPL	2015-01-03	85674
+103	Mumbai-Vashi	SPL	2015-01-04	58495
+103	Mumbai-Vashi	SPL	2015-01-05	83568
+104	Mumbai-Khar	HSR	2015-01-01	94835
+104	Mumbai-Khar	HSR	2015-01-02	84945
+104	Mumbai-Khar	HSR	2015-01-03	85936
+104	Mumbai-Khar	HSR	2015-01-04	58936
+104	Mumbai-Khar	HSR	2015-01-05	89346
+105	Mumbai-Powai	HSR	2015-01-01	99456
+105	Mumbai-Powai	HSR	2015-01-02	83985
+105	Mumbai-Powai	HSR	2015-01-03	89357
+105	Mumbai-Powai	HSR	2015-01-04	94562
+105	Mumbai-Powai	HSR	2015-01-05	94562
+Time taken: 0.081 seconds, Fetched: 30 row(s)

@@ -1,0 +1,7 @@
+Jack	100	Male	
+Bill	20	Male
+Joe	3	Male
+Cristina	30	Female
+Taylor	20	Female
+Emma	34	Female
+Smith	51	Male
