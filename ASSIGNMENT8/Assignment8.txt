@@ -1,0 +1,40 @@
+m1013673@A2ML21231L:~$ hive
+
+	
+------sales_info-----------
+
+create table sales_info(store_id INT, txn_dt DATE, txn_amt DOUBLE) row format delimited fields terminated by ','; 
+
+describe formatted sales_info;
+
+load data local inpath '/home/m1013673/Hadoop_Learning/ASSIGNMENT8/module_7_ex1' into table sales_info;
+
+select * from sales_info;
+
+hadoop dfs -ls hdfs://localhost:9000/user/hive/warehouse/sales_info
+
+
+------sales_master-----------------
+
+create EXTERNAL table sales_master(store_id INT, store_name STRING) row format delimited fields terminated by ',' LOCATION '/user/hive/warehouse/sales_master' ; 
+
+describe formatted sales_master;
+
+load data local inpath '/home/m1013673/Hadoop_Learning/ASSIGNMENT8/module_7_ex2' into table sales_master;
+
+select * from sales_master;
+
+hadoop dfs -ls hdfs://localhost:9000/user/hive/warehouse/sales_master
+
+
+------sales_report---------------
+
+
+CREATE EXTERNAL TABLE sales_report(store_id INT, store_name STRING, txn_amt DOUBLE) COMMENT 'Data about sales report' Row format delimited Fields terminated by ',' LOCATION '/user/hive/warehouse/sales_report';
+
+INSERT OVERWRITE TABLE sales_report SELECT T1.store_id,T2.store_name,T1.txn_amt FROM sales_info T1 JOIN sales_master T2 ON T1.store_id = T2.store_id;
+
+
+hadoop dfs -ls hdfs://localhost:9000/user/hive/warehouse/sales_report
+
+select * from sales_report;
