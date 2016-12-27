@@ -1,0 +1,11 @@
+m1013673@A2ML21231L:~$ hdfs dfs -put /home/m1013673/Hadoop_Learning/ASSIGNMENT5/module5_ex1_f1 /inputs/mr_inputs/
+
+m1013673@A2ML21231L:~$ hdfs dfs -put /home/m1013673/Hadoop_Learning/ASSIGNMENT5/module5_ex1_f2 /inputs/mr_inputs/
+
+
+
+m1013673@A2ML21231L:~/hadoop-2.6.0/bin$ hdfs dfs -rmr /outputMapSideJoin
+
+
+m1013673@A2ML21231L:~/hadoop-2.6.0/share/hadoop/mapreduce$ hadoop jar /home/m1013673/Hadoop_Learning/ASSIGNMENT5/MapSideJoin.jar /inputs/mr_inputs/module5_ex1_f2 /outputMapSideJoin
+
