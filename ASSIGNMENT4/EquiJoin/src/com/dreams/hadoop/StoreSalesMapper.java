@@ -19,7 +19,7 @@ public class StoreSalesMapper extends Mapper<LongWritable, Text, CustomKey, Text
 		String[] columns = value.toString().split(",");
 		System.out.println("EquiJoin: " + columns[0] + ":" + columns[1] + ":" + columns[2]);
 		if (columns != null) {
-			context.write(new CustomKey(Integer.parseInt(columns[0]), 2), new Text(columns[1] + "\t" + columns[2]));
+			context.write(new CustomKey(Integer.parseInt(columns[0]), 2), new Text(columns[2]));
 		}
 	}
 }

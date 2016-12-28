@@ -21,7 +21,7 @@ public class StoreSalesReducer extends Reducer<CustomKey, Text, IntWritable, Tex
 			Text salesInfo = itr.next();
 			Text storeSalesInfo = new Text(storeName.toString() + "\t" + salesInfo.toString());
 			System.out.println("EquiJoin: " + storeName.toString() + ":" + salesInfo.toString());
-			context.write(new IntWritable(key.getStoreId()), storeSalesInfo);
+			context.write(null, storeSalesInfo);
 		}
 	}
 }
